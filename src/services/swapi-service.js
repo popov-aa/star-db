@@ -34,8 +34,8 @@ export default class SwapiService {
         return body.results;
     }
 
-    getPlanet(id) {
-        return this.getResouce(`/planets/${id}`);
+    async getPlanet(id) {
+        return await this.getResouce(`/planets/${id}`);
     }
 
 }
