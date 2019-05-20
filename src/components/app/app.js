@@ -1,15 +1,15 @@
 import React from 'react'
 import './app.css'
 import Header from '../header'
-import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
-import PersonDetails from '../person-details'
+import ErrorIndicator from "../error-indicator";
+import PeoplePage from "../people-page/people-page";
 
 export default class App extends React.Component {
 
     state = {
         isRandomPlanetVisible: false,
-        selectedPerson: null
+        hasError: false
     }
 
     onRandomPlanetVisibleButtonClicked = () => {
@@ -20,31 +20,27 @@ export default class App extends React.Component {
         })
     }
 
-    onPersonSelected = (selectedPerson) => {
-        this.setState({
-            selectedPerson
-        })
+    componentDidCatch(error, errorInfo) {
+        this.setState({hasError: true})
     }
 
-    component
-
     render() {
-        const {selectedPerson, isRandomPlanetVisible} = this.state
+        const {selectedPerson, isRandomPlanetVisible, hasError} = this.state
         const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
-        return (
-            <div>
-                <Header/>
-                {randomPlanet}
-                <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList onPersonSelected={this.onPersonSelected}/>
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId={selectedPerson}/>
-                    </div>
+
+        if (hasError) {
+            return <ErrorIndicator/>
+        } else {
+            return (
+                <div>
+                    <Header/>
+                    <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
+                    {randomPlanet}
+                    <PeoplePage/>
+                    <PeoplePage/>
+                    <PeoplePage/>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
