@@ -5,21 +5,33 @@ import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
 import PersonDetails from '../person-details'
 
-const App = () => {
-    return (
-        <div>
-            <Header/>
-            <RandomPlanet/>
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList/>
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails/>
+export default class App extends React.Component {
+
+    state = {
+        selectedPerson: null
+    }
+
+    onPersonSelected = (selectedPerson) => {
+        this.setState({
+            selectedPerson
+        })
+    }
+
+    render() {
+        const {selectedPerson} = this.state
+        return (
+            <div>
+                <Header/>
+                <RandomPlanet/>
+                <div className="row mb2">
+                    <div className="col-md-6">
+                        <ItemList onPersonSelected={this.onPersonSelected}/>
+                    </div>
+                    <div className="col-md-6">
+                        <PersonDetails personId={selectedPerson}/>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
-
-export default App
