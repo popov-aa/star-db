@@ -8,7 +8,16 @@ import PersonDetails from '../person-details'
 export default class App extends React.Component {
 
     state = {
+        isRandomPlanetVisible: false,
         selectedPerson: null
+    }
+
+    onRandomPlanetVisibleButtonClicked = () => {
+        this.setState((state) => {
+            return {
+                isRandomPlanetVisible: !state.isRandomPlanetVisible
+            }
+        })
     }
 
     onPersonSelected = (selectedPerson) => {
@@ -17,12 +26,16 @@ export default class App extends React.Component {
         })
     }
 
+    component
+
     render() {
-        const {selectedPerson} = this.state
+        const {selectedPerson, isRandomPlanetVisible} = this.state
+        const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
         return (
             <div>
                 <Header/>
-                <RandomPlanet/>
+                {randomPlanet}
+                <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
                 <div className="row mb2">
                     <div className="col-md-6">
                         <ItemList onPersonSelected={this.onPersonSelected}/>
