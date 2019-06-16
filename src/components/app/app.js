@@ -5,6 +5,7 @@ import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
 import PersonDetails from '../person-details'
 import SwapiService from '../../services/swapi-service';
+import ErrorBoundry from '../error-boundry/error-boundry';
 
 const Row = ({left, right}) => {
     return (
@@ -45,11 +46,14 @@ export default class App extends React.Component {
         const {selectedPerson, isRandomPlanetVisible} = this.state
         const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
 
-        const itemList = (<ItemList
-            getData={this.swapiService.getAllPeople}
-            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
-            onPersonSelected={this.onPersonSelected}
-        />);
+        const itemList = (
+            <ItemList
+                getData={this.swapiService.getAllPeople}
+                onPersonSelected={this.onPersonSelected}
+            >
+                {({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
+            </ItemList>
+        );
 
         const personDetails = (
             <PersonDetails personId={selectedPerson}/>
@@ -60,7 +64,9 @@ export default class App extends React.Component {
                 <Header/>
                 {randomPlanet}
                 <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
-                <Row left={itemList} right={personDetails}/>
+                <ErrorBoundry>
+                    <Row left={itemList} right={personDetails}/>
+                </ErrorBoundry>
             </div>
         )
     }
