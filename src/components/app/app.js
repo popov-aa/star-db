@@ -6,6 +6,18 @@ import RandomPlanet from '../random-planet'
 import PersonDetails from '../person-details'
 import SwapiService from '../../services/swapi-service';
 
+const Row = ({left, right}) => {
+    return (
+        <div className="row mb2">
+            <div className="col-md-6">
+                {left}
+            </div>
+            <div className="col-md-6">
+                {right}
+            </div>
+        </div>
+    );
+}
 export default class App extends React.Component {
 
     swapiService = new SwapiService();
@@ -32,23 +44,23 @@ export default class App extends React.Component {
     render() {
         const {selectedPerson, isRandomPlanetVisible} = this.state
         const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
+
+        const itemList = (<ItemList
+            getData={this.swapiService.getAllPeople}
+            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
+            onPersonSelected={this.onPersonSelected}
+        />);
+
+        const personDetails = (
+            <PersonDetails personId={selectedPerson}/>
+        );
+
         return (
             <div>
                 <Header/>
                 {randomPlanet}
                 <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
-                <div className="row mb2">
-                    <div className="col-md-6">
-                        <ItemList
-                            getData={this.swapiService.getAllPeople}
-                            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
-                            onPersonSelected={this.onPersonSelected}
-                        />
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails personId={selectedPerson}/>
-                    </div>
-                </div>
+                <Row left={itemList} right={personDetails}/>
             </div>
         )
     }
