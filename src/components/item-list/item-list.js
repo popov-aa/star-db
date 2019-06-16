@@ -17,9 +17,9 @@ export default class ItemList extends React.Component {
     }
 
     renderItems = (items) => {
-        const {onPersonSelected} = this.props
-        return items.map(({id, name}) =>
-            <li key={id} onClick={() => onPersonSelected(id)}>{name}</li>
+        const {onPersonSelected, renderItem} = this.props
+        return items.map((item) =>
+            <li key={item.id} onClick={() => onPersonSelected(item.id)}>{renderItem(item)}</li>
         )
     }
 

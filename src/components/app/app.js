@@ -40,7 +40,8 @@ export default class App extends React.Component {
                 <div className="row mb2">
                     <div className="col-md-6">
                         <ItemList
-                            getData={this.swapiService.getAllPlanets}
+                            getData={this.swapiService.getAllPeople}
+                            renderItem={({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
                             onPersonSelected={this.onPersonSelected}
                         />
                     </div>
