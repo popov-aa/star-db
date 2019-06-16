@@ -5,6 +5,7 @@ import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
 import PersonDetails from '../person-details'
 import SwapiService from '../../services/swapi-service';
+import PeoplePage from '../people-page/people-page';
 import ErrorBoundry from '../error-boundry/error-boundry';
 
 const Row = ({left, right}) => {
