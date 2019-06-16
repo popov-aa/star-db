@@ -12,7 +12,6 @@ export default class PersonDetails extends React.Component {
 
     updatePerson () {
         const {personId} = this.props
-        console.log(personId)
         if (personId) {
             this.swapiService.getPerson(personId).then(person => {this.setState({person})})
         }

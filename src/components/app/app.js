@@ -4,8 +4,11 @@ import Header from '../header'
 import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
 import PersonDetails from '../person-details'
+import SwapiService from '../../services/swapi-service';
 
 export default class App extends React.Component {
+
+    swapiService = new SwapiService();
 
     state = {
         isRandomPlanetVisible: false,
@@ -26,8 +29,6 @@ export default class App extends React.Component {
         })
     }
 
-    component
-
     render() {
         const {selectedPerson, isRandomPlanetVisible} = this.state
         const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
@@ -38,7 +39,10 @@ export default class App extends React.Component {
                 <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
                 <div className="row mb2">
                     <div className="col-md-6">
-                        <ItemList onPersonSelected={this.onPersonSelected}/>
+                        <ItemList
+                            getData={this.swapiService.getAllPlanets}
+                            onPersonSelected={this.onPersonSelected}
+                        />
                     </div>
                     <div className="col-md-6">
                         <PersonDetails personId={selectedPerson}/>
