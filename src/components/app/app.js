@@ -3,7 +3,7 @@ import './app.css'
 import Header from '../header'
 import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
-import PersonDetails from '../person-details'
+import ItemDetails from '../item-details'
 import SwapiService from '../../services/swapi-service';
 import PeoplePage from '../people-page/people-page';
 import ErrorBoundry from '../error-boundry/error-boundry';
@@ -47,7 +47,7 @@ export default class App extends React.Component {
         const {selectedPerson, isRandomPlanetVisible} = this.state
         const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
 
-        const itemList = (
+        const peopleList = (
             <ItemList
                 getData={this.swapiService.getAllPeople}
                 onPersonSelected={this.onPersonSelected}
@@ -57,7 +57,18 @@ export default class App extends React.Component {
         );
 
         const personDetails = (
-            <PersonDetails personId={selectedPerson}/>
+            <ItemDetails
+                getData={this.swapiService.getPerson}
+                getImageUrl={this.swapiService.getPersonImage}
+                itemId={11}
+            />
+        );
+        const starshipDetails = (
+            <ItemDetails
+                getData={this.swapiService.getStarship}
+                getImageUrl={this.swapiService.getStarshipImage}
+                itemId={11}
+            />
         );
 
         return (
@@ -66,7 +77,7 @@ export default class App extends React.Component {
                 {randomPlanet}
                 <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
                 <ErrorBoundry>
-                    <Row left={itemList} right={personDetails}/>
+                    <Row left={personDetails} right={starshipDetails}/>
                 </ErrorBoundry>
             </div>
         )

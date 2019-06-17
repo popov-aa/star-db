@@ -1,6 +1,6 @@
 import React from 'react'
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import ErrorButton from "../error-button/error-button";
 import ErrorIndicator from "../error-indicator";
 
@@ -32,7 +32,7 @@ export default class PeoplePage extends React.Component {
                         <ItemList onPersonSelected={this.onPersonSelected}/>
                     </div>
                     <div className="col-md-6">
-                        <PersonDetails personId={selectedPerson}/>
+                        <ItemDetails personId={selectedPerson}/>
                     </div>
                     <ErrorButton/>
                 </div>

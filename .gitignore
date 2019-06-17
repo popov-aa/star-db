@@ -24,3 +24,4 @@ yarn-error.log*
 /.idea
 /.vscode/tasks.json
 /package-lock.json
+/.idea
