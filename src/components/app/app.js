@@ -83,6 +83,7 @@ export default class App extends React.Component {
                 <Header/>
                 {randomPlanet}
                 <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
+                {peopleList}
                 <ErrorBoundry>
                     <Row left={personDetails} right={starshipDetails}/>
                 </ErrorBoundry>
