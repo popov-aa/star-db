@@ -9,9 +9,9 @@ import {
     PersonList,
     StarshipList,
     PlanetList,
-    PersonDatails,
-    PlanetDatails,
-    StarshipDatails
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails
 } from '../sw-components';
 import {SwapiServiceProvider} from "../swapi-service-context";
 

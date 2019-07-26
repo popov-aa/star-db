@@ -5,16 +5,16 @@ import {
 } from './item-lists'
 
 import {
-    PersonDatails,
-    PlanetDatails,
-    StarshipDatails
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails
 } from './details'
 
 export {
     PersonList,
     PlanetList,
     StarshipList,
-    PersonDatails,
-    PlanetDatails,
-    StarshipDatails
+    PersonDetails,
+    PlanetDetails,
+    StarshipDetails
 }
