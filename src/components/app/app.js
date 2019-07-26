@@ -13,6 +13,7 @@ import {
     PlanetDatails,
     StarshipDatails
 } from '../sw-components';
+import {SwapiServiceProvider} from "../swapi-service-context";
 
 const Row = ({left, right}) => {
     return (
@@ -68,10 +69,12 @@ export default class App extends React.Component {
                 {randomPlanet}
 
                 <ErrorBoundry>
-                    <Header/>
-                    <PersonList/>
-                    <StarshipList/>
-                    <PlanetList/>
+                    <SwapiServiceProvider value={this.swapiService}>
+                        <Header/>
+                        <PersonList/>
+                        <StarshipList/>
+                        <PlanetList/>
+                    </SwapiServiceProvider>
                 </ErrorBoundry>
             </div>
         )
