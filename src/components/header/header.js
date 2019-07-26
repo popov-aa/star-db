@@ -1,9 +1,20 @@
 import React from 'react';
 import './header.css'
 
-const Header = () => {
+const Header = ({onServiceChange}) => {
     return (
-        <b>Header</b>
+        <div className="header d-flex">
+            <h3>
+                <a href="#/">
+                    StarDB
+                </a>
+            </h3>
+            <button
+                onClick={() => onServiceChange()}
+                className="btn btn-primary btn-sm">
+                Change service
+            </button>
+        </div>
     );
 }
 export default Header;

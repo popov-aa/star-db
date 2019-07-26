@@ -4,6 +4,7 @@ import Header from '../header'
 import ItemList from '../item-list'
 import RandomPlanet from '../random-planet'
 import SwapiService from '../../services/swapi-service';
+import DummySwapiService from "../../services/dummy-swapi-service";
 import ErrorBoundry from '../error-boundry/error-boundry';
 import {
     PersonList,
@@ -29,9 +30,8 @@ const Row = ({left, right}) => {
 }
 export default class App extends React.Component {
 
-    swapiService = new SwapiService();
-
     state = {
+        swapiService: new SwapiService(),
         isRandomPlanetVisible: false,
         selectedPerson: null
     }
@@ -41,6 +41,14 @@ export default class App extends React.Component {
             return {
                 isRandomPlanetVisible: !state.isRandomPlanetVisible
             }
+        })
+    }
+
+    onServiceChange = () => {
+        this.setState(({swapiService}) => {
+            const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService
+            console.log(`SwapiService changed to ${Service.name}`)
+            return {swapiService: new Service()}
         })
     }
 
@@ -54,23 +62,14 @@ export default class App extends React.Component {
         const {selectedPerson, isRandomPlanetVisible} = this.state
         const randomPlanet = isRandomPlanetVisible ? <RandomPlanet/> : null;
 
-        const peopleList = (
-            <ItemList
-                getData={this.swapiService.getAllPeople}
-                onPersonSelected={this.onPersonSelected}
-            >
-                {({name, gender, birthYear}) => `${name} (${gender}, ${birthYear})`}
-            </ItemList>
-        );
-
         return (
             <div>
                 <button className="btn btn-primary" onClick={this.onRandomPlanetVisibleButtonClicked}>Toggle</button>
                 {randomPlanet}
 
                 <ErrorBoundry>
-                    <SwapiServiceProvider value={this.swapiService}>
-                        <Header/>
+                    <SwapiServiceProvider value={this.state.swapiService}>
+                        <Header onServiceChange={this.onServiceChange}/>
                         <PersonList/>
                         <StarshipList/>
                         <PlanetList/>
