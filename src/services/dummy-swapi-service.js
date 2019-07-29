@@ -32,7 +32,7 @@ export default class DummySwapiService {
     }
 
     getPerson = async (id) => {
-        return this.persons.find((person) => person.id == id)
+        return this.persons.find((person) => person.id === id)
     }
 
     getAllStarships = async () => {
@@ -40,7 +40,7 @@ export default class DummySwapiService {
     }
 
     getStarship = async (id) => {
-        return this.starships.find((starship) => starship.id == id)
+        return this.starships.find((starship) => starship.id === id)
     }
 
     getAllPlanets = async () => {
@@ -48,7 +48,7 @@ export default class DummySwapiService {
     }
 
     getPlanet = async (id) => {
-        return this.planets.find((planet) => planet.id == id)
+        return this.planets.find((planet) => planet.id === id)
 
     }
 

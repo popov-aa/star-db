@@ -49,7 +49,7 @@ export default class ItemDetails extends React.Component {
         if (item) {
             return (
                 <div className="item-details card">
-                    <img className="item-image" src={image} alt="item image"/>
+                    <img className="item-image" src={image} alt="item"/>
                     <div className="card-body">
                         <h4>{item.name}</h4>
                         <ul className="list-group list-group-flush">

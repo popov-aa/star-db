@@ -69,7 +69,7 @@ const PlanetContent = ({planet}) => {
     const {id, name, population, rotationPeriod, diameter} = planet;
     return (
         <React.Fragment>
-            <img width="256" height="256" src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}/>
+            <img width="256" height="256" src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt="planet"/>
             <h4>{name}</h4>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item">
