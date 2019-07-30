@@ -31,6 +31,7 @@ export default class App extends React.Component {
                         <BrowserRouter>
                             <RandomPlanet/>
                             <Header onServiceChange={this.onServiceChange}/>
+                            <Route path="/" render={() => <h2>Hello.</h2>} exact/>
                             <Route path="/people" component={PeoplePage}/>
                             <Route path="/planets" component={PlanetsPage}/>
                             <Route path="/starships" component={StarshipsPage}/>
